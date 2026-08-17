@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>软件下载</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                "Microsoft YaHei",
+                Arial,
+                sans-serif;
+
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        .card {
+            width: 90%;
+            max-width: 420px;
+
+            padding: 40px 25px;
+
+            text-align: center;
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #24292f;
+            color: #ffffff;
+
+            border-radius: 20px;
+
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+
+            font-size: 26px;
+        }
+
+        .version {
+            margin-bottom: 12px;
+
+            color: #777;
+
+            font-size: 15px;
+        }
+
+        .description {
+            margin-bottom: 30px;
+
+            color: #666;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        .download {
+            display: inline-block;
+
+            padding: 14px 32px;
+
+            background: #24292f;
+            color: #ffffff;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 600;
+
+            transition:
+                transform 0.15s,
+                opacity 0.15s;
+        }
+
+        .download:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+        }
+
+        .download:active {
+            transform: translateY(1px);
+        }
+
+        .info {
+            margin-top: 25px;
+
+            color: #999;
+
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 30px;
+
+            font-size: 12px;
+
+            color: #aaa;
+        }
+
+        .footer a {
+            color: #888;
+
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <!-- 软件图标 -->
+        <div class="icon">
+            S
+        </div>
+
+        <!-- 软件名称 -->
+        <h1>禁漫天堂</h1>
+
+        <!-- 版本 -->
+        <div class="version">
+            最新版本：V91.78
+        </div>
+
+        <!-- 软件简介 -->
+        <div class="description">
+            <br>
+            点击下面的按钮即可下载
+        </div>
+
+        <!-- 下载按钮 -->
+        <a
+            class="download"
+            href="https://github.com/sulong-code/download/releases/download/V91.78/base.apk"
+        >
+            立即下载 APK
+        </a>
+
+        <!-- 文件信息 -->
+        <div class="info">
+            Android · APK<br>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            Powered by
+            <a href="https://github.com/" target="_blank">
+                GitHub
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
