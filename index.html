@@ -81,7 +81,7 @@
         }
 
         .description {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
 
             color: #666;
 
@@ -90,10 +90,44 @@
             line-height: 1.7;
         }
 
+        .password-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .password-input {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #d0d0d0;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.15s,
+                box-shadow 0.15s;
+        }
+
+        .password-input:focus {
+            border-color: #24292f;
+
+            box-shadow:
+                0 0 0 3px rgba(36, 41, 47, 0.08);
+        }
+
+        .enter-button,
         .download {
             display: inline-block;
 
             padding: 14px 32px;
+
+            border: none;
 
             background: #24292f;
             color: #ffffff;
@@ -105,18 +139,45 @@
             font-size: 16px;
             font-weight: 600;
 
+            cursor: pointer;
+
             transition:
                 transform 0.15s,
                 opacity 0.15s;
         }
 
+        .enter-button:hover,
         .download:hover {
             opacity: 0.88;
+
             transform: translateY(-1px);
         }
 
+        .enter-button:active,
         .download:active {
             transform: translateY(1px);
+        }
+
+        .download {
+            margin-top: 10px;
+        }
+
+        .error {
+            min-height: 20px;
+
+            margin-top: 5px;
+
+            color: #d93025;
+
+            font-size: 13px;
+        }
+
+        .success {
+            margin-top: 15px;
+
+            color: #188038;
+
+            font-size: 13px;
         }
 
         .info {
@@ -125,6 +186,7 @@
             color: #999;
 
             font-size: 13px;
+
             line-height: 1.6;
         }
 
@@ -145,6 +207,11 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        /* 默认隐藏下载区域 */
+        #downloadArea {
+            display: none;
+        }
     </style>
 </head>
 
@@ -158,41 +225,153 @@
         </div>
 
         <!-- 软件名称 -->
-        <h1>禁漫天堂</h1>
+        <h1>我的软件</h1>
 
-        <!-- 版本 -->
+        <!-- 软件版本 -->
         <div class="version">
             最新版本：V91.78
         </div>
 
         <!-- 软件简介 -->
         <div class="description">
+            一个简单的 Android 应用。
             <br>
-            点击下面的按钮即可下载
+            输入访问密码后即可下载。
         </div>
 
-        <!-- 下载按钮 -->
-        <a
-            class="download"
-            href="https://github.com/sulong-code/download/releases/download/V91.78/base.apk"
-        >
-            立即下载 APK
-        </a>
+        <!-- 密码区域 -->
+        <div id="passwordArea">
+
+            <div class="password-box">
+
+                <input
+                    id="passwordInput"
+                    class="password-input"
+                    type="password"
+                    placeholder="请输入访问密码"
+                    autocomplete="off"
+                >
+
+                <button
+                    id="enterButton"
+                    class="enter-button"
+                    onclick="checkPassword()"
+                >
+                    进入下载
+                </button>
+
+            </div>
+
+            <div
+                id="errorMessage"
+                class="error"
+            ></div>
+
+        </div>
+
+        <!-- 下载区域 -->
+        <div id="downloadArea">
+
+            <div class="success">
+                验证成功，可以下载。
+            </div>
+
+            <a
+                class="download"
+                href="https://github.com/sulong-code/download/releases/download/V91.78/base.apk"
+            >
+                立即下载 APK
+            </a>
+
+        </div>
 
         <!-- 文件信息 -->
         <div class="info">
             Android · APK<br>
+            免费下载
         </div>
 
         <!-- 页脚 -->
         <div class="footer">
             Powered by
-            <a href="https://github.com/" target="_blank">
+            <a
+                href="https://github.com/"
+                target="_blank"
+            >
                 GitHub
             </a>
         </div>
 
     </div>
+
+    <script>
+
+        // ==========================
+        // 访问密码
+        // ==========================
+
+        const PASSWORD =
+            "7f3c9a21-6e84-4b17-a5d2-91c7e0f84b36";
+
+
+        // ==========================
+        // 密码验证
+        // ==========================
+
+        function checkPassword() {
+
+            const input =
+                document.getElementById("passwordInput").value;
+
+            const errorMessage =
+                document.getElementById("errorMessage");
+
+            const passwordArea =
+                document.getElementById("passwordArea");
+
+            const downloadArea =
+                document.getElementById("downloadArea");
+
+
+            if (input === PASSWORD) {
+
+                // 密码正确
+
+                errorMessage.textContent = "";
+
+                passwordArea.style.display = "none";
+
+                downloadArea.style.display = "block";
+
+            } else {
+
+                // 密码错误
+
+                errorMessage.textContent =
+                    "访问密码错误，请重新输入。";
+
+            }
+
+        }
+
+
+        // ==========================
+        // 回车直接验证
+        // ==========================
+
+        document
+            .getElementById("passwordInput")
+            .addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+
+                    checkPassword();
+
+                }
+
+            });
+
+    </script>
 
 </body>
 </html>
