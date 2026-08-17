@@ -122,7 +122,8 @@
         }
 
         .enter-button,
-        .download {
+        .download,
+        .direct-link {
             display: inline-block;
 
             padding: 14px 32px;
@@ -147,19 +148,32 @@
         }
 
         .enter-button:hover,
-        .download:hover {
+        .download:hover,
+        .direct-link:hover {
             opacity: 0.88;
 
             transform: translateY(-1px);
         }
 
         .enter-button:active,
-        .download:active {
+        .download:active,
+        .direct-link:active {
             transform: translateY(1px);
         }
 
         .download {
             margin-top: 10px;
+        }
+
+        .direct-link {
+            margin-top: 10px;
+
+            background: #ffffff;
+            color: #24292f;
+
+            border: 1px solid #d0d0d0;
+
+            font-size: 14px;
         }
 
         .error {
@@ -178,6 +192,16 @@
             color: #188038;
 
             font-size: 13px;
+        }
+
+        .download-tip {
+            margin-top: 12px;
+
+            color: #888;
+
+            font-size: 12px;
+
+            line-height: 1.6;
         }
 
         .info {
@@ -239,7 +263,11 @@
             输入访问密码后即可下载。
         </div>
 
+
+        <!-- ========================== -->
         <!-- 密码区域 -->
+        <!-- ========================== -->
+
         <div id="passwordArea">
 
             <div class="password-box">
@@ -255,6 +283,7 @@
                 <button
                     id="enterButton"
                     class="enter-button"
+                    type="button"
                     onclick="checkPassword()"
                 >
                     进入下载
@@ -269,73 +298,143 @@
 
         </div>
 
+
+        <!-- ========================== -->
         <!-- 下载区域 -->
+        <!-- ========================== -->
+
         <div id="downloadArea">
 
             <div class="success">
                 验证成功，可以下载。
             </div>
 
+
+            <!--
+                主下载按钮
+
+                target="_blank"
+                表示在新标签页打开，
+                不覆盖当前密码页面。
+            -->
+
             <a
+                id="downloadButton"
                 class="download"
                 href="https://github.com/sulong-code/download/releases/download/V91.78/base.apk"
+                target="_blank"
+                rel="noopener noreferrer"
             >
                 立即下载 APK
             </a>
 
+
+            <!--
+                备用链接
+
+                如果主按钮没有正常触发下载，
+                可以使用这个链接。
+            -->
+
+            <br>
+
+            <a
+                class="direct-link"
+                href="https://github.com/sulong-code/download/releases/download/V91.78/base.apk"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                打开下载链接
+            </a>
+
+
+            <div class="download-tip">
+                如果点击下载后长时间没有反应，
+                可以尝试使用“打开下载链接”。
+            </div>
+
         </div>
 
+
+        <!-- ========================== -->
         <!-- 文件信息 -->
+        <!-- ========================== -->
+
         <div class="info">
             Android · APK<br>
             免费下载
         </div>
 
+
+        <!-- ========================== -->
         <!-- 页脚 -->
+        <!-- ========================== -->
+
         <div class="footer">
+
             Powered by
+
             <a
                 href="https://github.com/"
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 GitHub
             </a>
+
         </div>
 
     </div>
 
+
     <script>
 
-        // ==========================
+        // ========================================
         // 访问密码
-        // ==========================
+        // ========================================
 
         const PASSWORD =
             "7f3c9a21-6e84-4b17-a5d2-91c7e0f84b36";
 
 
-        // ==========================
+        // ========================================
+        // GitHub Release 下载地址
+        // ========================================
+
+        const DOWNLOAD_URL =
+            "https://github.com/sulong-code/download/releases/download/V91.78/base.apk";
+
+
+        // ========================================
         // 密码验证
-        // ==========================
+        // ========================================
 
         function checkPassword() {
 
             const input =
-                document.getElementById("passwordInput").value;
+                document
+                    .getElementById("passwordInput")
+                    .value
+                    .trim();
+
 
             const errorMessage =
                 document.getElementById("errorMessage");
 
+
             const passwordArea =
                 document.getElementById("passwordArea");
+
 
             const downloadArea =
                 document.getElementById("downloadArea");
 
 
-            if (input === PASSWORD) {
+            // ----------------------------
+            // 密码正确
+            // ----------------------------
 
-                // 密码正确
+            if (input === PASSWORD) {
 
                 errorMessage.textContent = "";
 
@@ -343,9 +442,14 @@
 
                 downloadArea.style.display = "block";
 
-            } else {
+            }
 
-                // 密码错误
+
+            // ----------------------------
+            // 密码错误
+            // ----------------------------
+
+            else {
 
                 errorMessage.textContent =
                     "访问密码错误，请重新输入。";
@@ -355,21 +459,50 @@
         }
 
 
-        // ==========================
+        // ========================================
         // 回车直接验证
-        // ==========================
+        // ========================================
 
         document
             .getElementById("passwordInput")
-            .addEventListener("keydown", function(event) {
+            .addEventListener(
+                "keydown",
+                function(event) {
 
-                if (event.key === "Enter") {
+                    if (event.key === "Enter") {
 
-                    checkPassword();
+                        checkPassword();
+
+                    }
 
                 }
+            );
 
-            });
+
+        // ========================================
+        // 下载按钮
+        // ========================================
+
+        document
+            .getElementById("downloadButton")
+            .addEventListener(
+                "click",
+                function() {
+
+                    /*
+                     * 这里只负责打开 GitHub Release。
+                     *
+                     * APK 是否直接下载，
+                     * 最终由 GitHub 的响应和浏览器决定。
+                     */
+
+                    console.log(
+                        "正在打开下载地址：",
+                        DOWNLOAD_URL
+                    );
+
+                }
+            );
 
     </script>
 
